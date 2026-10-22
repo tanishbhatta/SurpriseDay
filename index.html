@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Happy Birthday Jebi</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💗</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="hearts" aria-hidden="true"></div>
+
+  <!-- Gate -->
+  <div id="gate">
+    <div class="gate-inner">
+      <div class="gate-heart">💝</div>
+      <p class="gate-small">a little something for</p>
+      <h1 class="gate-name" data-name></h1>
+      <button id="gateBtn" class="btn">Open your present</button>
+    </div>
+  </div>
+
+  <main>
+    <header class="hero">
+      <h1 class="hero-name" data-name></h1>
+      <div class="divider"><span>♥</span></div>
+      <p class="hero-line" id="heroLine"></p>
+      <p class="scroll-hint">scroll down ↓</p>
+    </header>
+
+    <section class="card">
+      <span class="chip">✨ Scratch to reveal</span>
+      <h2 id="scratchTitle"></h2>
+      <p class="sub" id="scratchSub"></p>
+      <div class="divider small"><span>♡</span></div>
+      <div class="scratch-frame">
+        <div class="scratch-wrap" id="scratchWrap">
+          <img id="scratchImg" alt="My favourite photo of you" />
+          <canvas id="scratchCanvas"></canvas>
+          <div class="scratch-hint" id="scratchHint"><b>Scratch here</b><small>with your finger</small></div>
+        </div>
+      </div>
+      <p class="caption hidden" id="scratchCaption"></p>
+    </section>
+
+    <!-- 3. Letter -->
+    <section class="card">
+      <span class="chip">💌 For your eyes only</span>
+      <h2>A letter for you</h2>
+      <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Open the letter">
+        <div class="env-back"></div>
+        <div class="env-letter"><span>💗</span></div>
+        <div class="env-front"></div>
+        <div class="env-flap"></div>
+        <div class="env-seal" id="sealLetter"></div>
+        <div class="env-stamp">♥</div>
+      </div>
+      <button class="pill" id="envBtn">✉️ Tap to open</button>
+    </section>
+
+    <!-- 4. Reasons -->
+    <section class="card">
+      <span class="chip" id="reasonsChip"></span>
+      <h2>Things I love about you</h2>
+      <p class="sub">The short version. The long one would not fit.</p>
+      <div class="divider small"><span>♡</span></div>
+      <ol class="reasons" id="reasons"></ol>
+      <p class="tiny">...and a hundred more I ran out of room for</p>
+    </section>
+
+    <!-- 5. Wheel -->
+    <section class="card">
+      <span class="chip">🎁 Your gift</span>
+      <h2 id="wheelTitle"></h2>
+      <p class="sub" id="wheelSub"></p>
+      <div class="wheel-box">
+        <div class="wheel-pin"></div>
+        <canvas id="wheel" width="600" height="600"></canvas>
+        <div class="wheel-hub">♥</div>
+      </div>
+      <button class="btn" id="spinBtn">Spin the wheel</button>
+      <p class="spin-result hidden" id="spinResult"></p>
+    </section>
+
+    <!-- 6. Songs -->
+    <section class="card">
+      <span class="chip">🎶 On repeat</span>
+      <h2>Songs that remind me of you</h2>
+      <p class="sub">Every one of these plays and I think of you.</p>
+      <div class="divider small"><span>♡</span></div>
+      <div class="songs" id="songs"></div>
+    </section>
+
+    <!-- 7. Favourites -->
+    <section class="card">
+      <span class="chip">📸 Gallery</span>
+      <h2>A few of my favourite yous</h2>
+      <p class="sub">Tap any of them.</p>
+      <div class="divider small"><span>♡</span></div>
+      <div class="polaroids" id="polaroids"></div>
+    </section>
+
+    <!-- 8. Moon -->
+    <section class="card night">
+      <span class="chip dark">🌙 The sky that night</span>
+      <h2>The moon on the day you were born</h2>
+      <p class="sub" id="moonDate"></p>
+      <div class="moon-box">
+        <div class="stars" id="stars"></div>
+        <svg id="moon" viewBox="0 0 220 220" aria-label="Moon phase"></svg>
+      </div>
+      <p class="moon-name" id="moonName"></p>
+      <p class="sub" id="moonNote"></p>
+    </section>
+
+    <!-- 9. Finale -->
+    <section class="finale">
+      <h2 class="finale-head" id="finaleHead"></h2>
+      <div class="finale-names" id="finaleNames"></div>
+      <p class="finale-closing" id="finaleClosing"></p>
+      <button class="btn" id="confettiBtn">🎉 One more time</button>
+    </section>
+
+    <footer>made with too much love, for Jebi 💗</footer>
+  </main>
+
+  <!-- Letter modal -->
+  <div class="modal" id="letterModal" aria-hidden="true">
+    <div class="paper">
+      <button class="close" id="closeLetter" aria-label="Close">×</button>
+      <p class="letter-to" id="letterTo"></p>
+      <div class="letter-body" id="letterBody"></div>
+      <p class="letter-from" id="letterFrom"></p>
+    </div>
+  </div>
+
+  <!-- Photo lightbox -->
+  <div class="modal" id="lightbox" aria-hidden="true">
+    <figure class="lb">
+      <img id="lbImg" alt="" />
+      <figcaption id="lbCap"></figcaption>
+    </figure>
+  </div>
+
+  <button id="musicBtn" class="music hidden" aria-label="Toggle music">♫</button>
+  <audio id="audio" loop preload="none"></audio>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <script src="content.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
